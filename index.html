@@ -6,67 +6,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
-}
-.container { text-align:center; padding:60px 20px; color:#7a1c2f; }
-h1 { font-size:48px; font-family:'Great Vibes',cursive; }
-
-.card {
-  background:white;
-  padding:36px;
-  border-radius:24px;
-  box-shadow:0 14px 34px rgba(0,0,0,.18);
-  display:inline-block;
-  max-width:680px;
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+text-align:center;
+color:#7a1c2f;
 }
 
-.question{font-size:22px;margin-bottom:20px;}
+.container{padding:60px 20px;}
+
+h1{
+font-family:"Great Vibes",cursive;
+font-size:48px;
+}
+
+.card{
+background:white;
+padding:36px;
+border-radius:24px;
+box-shadow:0 14px 34px rgba(0,0,0,.18);
+display:inline-block;
+max-width:720px;
+}
+
+.question{font-size:22px;margin-bottom:20px;line-height:1.6;}
 .hidden{display:none;}
 
 input{
-  padding:12px;
-  border-radius:20px;
-  border:1px solid #ddd;
-  width:240px;
-  text-align:center;
+padding:12px;
+border-radius:20px;
+border:1px solid #ddd;
+width:240px;
+text-align:center;
 }
 
 button{
-  background:#e63946;
-  color:white;
-  border:none;
-  padding:14px 26px;
-  border-radius:30px;
-  margin:8px;
-  cursor:pointer;
+background:#e63946;
+color:white;
+border:none;
+padding:14px 26px;
+border-radius:30px;
+margin:8px;
+cursor:pointer;
 }
 
 #attemptMsg{
-  margin-top:10px;
-  min-height:22px;
-  color:#c1121f;
-  font-size:15px;
-  font-weight:500;
+min-height:24px;
+margin-top:10px;
+color:#c1121f;
+font-weight:500;
 }
 
-.hint{display:none;font-size:14px;opacity:.8;margin-top:6px;}
+.hint{display:none;font-size:14px;margin-top:6px;opacity:.8;}
 
 .secretBox{
-  background:#fff0f3;
-  padding:22px;
-  border-radius:18px;
-  text-align:left;
-  white-space:pre-line;
+background:#fff0f3;
+padding:22px;
+border-radius:18px;
+text-align:left;
+white-space:pre-line;
+font-size:16px;
 }
 
 .rose{
-  position:fixed;
-  top:-40px;
-  font-size:24px;
-  animation:fall linear forwards;
+position:fixed;
+top:-40px;
+font-size:24px;
+animation:fall linear forwards;
 }
 @keyframes fall{to{transform:translateY(110vh)}}
 </style>
@@ -92,45 +99,60 @@ button{
 <button onclick="unlock()">Unlock</button>
 </div>
 
-<!-- Q1 -->
+<!-- ROMANTIC QUESTIONS -->
+
 <div id="q1" class="hidden">
-<div class="question">Are you ready? 💌</div>
-<button onclick="nextStep('q1','q2')">Yes</button>
-<button onclick="nextStep('q1','q2')">Always ready</button>
+<div class="question">Hey my Brewtiful Gentleman… are you ready for something special? 💌</div>
+<button onclick="next('q1','q2')">Always for you</button>
+<button onclick="next('q1','q2')">Tell me already 😌</button>
 </div>
 
-<!-- Q2 -->
 <div id="q2" class="hidden">
-<div class="question">Do you know how special you are? ✨</div>
-<button onclick="nextStep('q2','q3')">Maybe</button>
-<button onclick="nextStep('q2','q3')">Tell me</button>
+<div class="question">Do you know how dangerously special you are to me? ✨</div>
+<button onclick="next('q2','q3')">Maybe a little</button>
+<button onclick="next('q2','q3')">I want proof</button>
 </div>
 
-<!-- Q3 -->
 <div id="q3" class="hidden">
-<div class="question">What day is this for? 🌹</div>
-<button onclick="nextStep('q3','q4')">Rose Day</button>
-<button onclick="nextStep('q3','q4')">Our day</button>
+<div class="question">This surprise is made with what? ❤️</div>
+<button onclick="next('q3','q4')">Love</button>
+<button onclick="next('q3','q4')">Extra love</button>
 </div>
 
-<!-- Q4 -->
 <div id="q4" class="hidden">
 <div class="question">Ready to receive your rose? 🐾</div>
 <button onclick="startCountdown()">Accept Rose</button>
 </div>
 
-<div id="count" class="hidden"><div id="cd">3</div></div>
+<!-- COUNTDOWN -->
+
+<div id="count" class="hidden">
+<div class="question">Sending a tiny messenger…</div>
+<div id="cd">3</div>
+</div>
+
+<!-- CAT GIF STEP -->
 
 <div id="gifStep" class="hidden">
-<div class="question">A rose for Faiz Sir 🌹</div>
+<div class="question">A rose for Faiz Sir — the gentleman 🌹</div>
 <img src="cute.gif" width="200">
 <button onclick="showFinal()">Take the Rose</button>
 </div>
 
+<!-- FULL PREVIOUS FINAL MESSAGE -->
+
 <div id="final" class="hidden">
-<div class="question">You are warmth like coffee ☕❤️</div>
-<button onclick="showSecret()">Open Secret 💌</button>
+<div class="question">
+You are warmth like coffee ☕<br>
+calm like my favorite place,<br>
+and happiness like unexpected good news.<br><br>
+Happy Rose Day to my Brewtiful Gentleman 🌹❤️<br><br>
+— Yours, always
 </div>
+<button onclick="showSecret()">Open Secret Message 💌</button>
+</div>
+
+<!-- FULL SECRET MESSAGE -->
 
 <div id="secret" class="hidden">
 <div class="secretBox" id="secretText"></div>
@@ -140,17 +162,15 @@ button{
 </div>
 
 <script>
-const PASSWORD="i love you";   // ✅ new password
+const PASSWORD="i love you";
 let attempts=0;
 
 function unlock(){
-const v=document.getElementById("pass").value.toLowerCase().trim();
-const msg=document.getElementById("attemptMsg");
-const hint=document.getElementById("hint");
+const v=pass.value.toLowerCase().trim();
+const msg=attemptMsg;
 
 if(v===PASSWORD){
-nextStep('lock','q1');
-msg.innerText="";
+next('lock','q1');
 return;
 }
 
@@ -166,45 +186,64 @@ hint.style.display="block";
 }
 }
 
-function nextStep(a,b){
-document.getElementById(a).style.display='none';
-document.getElementById(b).style.display='block';
+function next(a,b){
+document.getElementById(a).style.display="none";
+document.getElementById(b).style.display="block";
 }
 
 function startCountdown(){
-nextStep('q4','count');
+next('q4','count');
 let n=3;
 const iv=setInterval(()=>{
-document.getElementById("cd").innerText=--n;
-if(n==0){clearInterval(iv);nextStep('count','gifStep');}
+cd.innerText=--n;
+if(n==0){clearInterval(iv);next('count','gifStep');}
 },1000);
 }
 
 function showFinal(){
-nextStep('gifStep','final');
-document.getElementById("bgMusic").play().catch(()=>{});
-for(let i=0;i<40;i++) rose();
+next('gifStep','final');
+bgMusic.play().catch(()=>{});
+for(let i=0;i<50;i++) rose();
 }
 
 const secretMsg=`Be clingy with me.
-I don't want space — I want you.`;
+
+i don't want space - i want you.
+
+Text me when you miss me, even
+
+if it's every five minutes.
+
+Call me just to breathe on the line. send me the selfies you almost delete.
+
+Tell me about your day, the little things, the nothing things — i want to know it all.
+
+Let me feel you in the quiet moments too. i don't get tired of
+
+you.
+
+i love the way you stay close.`;
 
 let i=0;
-function showSecret(){ nextStep('final','secret'); type(); }
+function showSecret(){
+next('final','secret');
+type();
+for(let j=0;j<60;j++) rose();
+}
 
 function type(){
 if(i<secretMsg.length){
-document.getElementById("secretText").innerHTML+=secretMsg[i++];
+secretText.innerHTML+=secretMsg[i++];
 setTimeout(type,25);
 }
 }
 
 function rose(){
-const r=document.createElement('div');
-r.className='rose';
-r.innerHTML='🌹';
-r.style.left=Math.random()*100+'vw';
-r.style.animationDuration=(3+Math.random()*5)+'s';
+const r=document.createElement("div");
+r.className="rose";
+r.innerHTML="🌹";
+r.style.left=Math.random()*100+"vw";
+r.style.animationDuration=(3+Math.random()*5)+"s";
 document.body.appendChild(r);
 setTimeout(()=>r.remove(),8000);
 }
