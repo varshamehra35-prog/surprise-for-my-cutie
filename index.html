@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Surprise for my cutie 🌹</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ffdde1,#ee9ca7);
+}
+.container { text-align:center; padding:60px 20px; color:#7a1c2f; }
+h1 { font-size:48px; font-family:'Great Vibes',cursive; }
+
+.card {
+  background:white;
+  padding:36px;
+  border-radius:24px;
+  box-shadow:0 14px 34px rgba(0,0,0,.18);
+  display:inline-block;
+  max-width:680px;
+}
+
+.question{font-size:22px;margin-bottom:20px;}
+.hidden{display:none;}
+
+input{
+  padding:12px;
+  border-radius:20px;
+  border:1px solid #ddd;
+  width:240px;
+  text-align:center;
+}
+
+button{
+  background:#e63946;
+  color:white;
+  border:none;
+  padding:14px 26px;
+  border-radius:30px;
+  margin:8px;
+  cursor:pointer;
+}
+
+#attemptMsg{
+  margin-top:10px;
+  min-height:22px;
+  color:#c1121f;
+  font-size:15px;
+  font-weight:500;
+}
+
+.hint{display:none;font-size:14px;opacity:.8;margin-top:6px;}
+
+.secretBox{
+  background:#fff0f3;
+  padding:22px;
+  border-radius:18px;
+  text-align:left;
+  white-space:pre-line;
+}
+
+.rose{
+  position:fixed;
+  top:-40px;
+  font-size:24px;
+  animation:fall linear forwards;
+}
+@keyframes fall{to{transform:translateY(110vh)}}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+<h1>Surprise for my cutie 🌹</h1>
+
+<div class="card">
+
+<!-- LOCK -->
+<div id="lock">
+<div class="question">Private surprise 🔒<br>Enter password</div>
+<input id="pass">
+<div id="attemptMsg"></div>
+<div id="hint" class="hint">Hint: 3 magic words 💌</div>
+<button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- Q1 -->
+<div id="q1" class="hidden">
+<div class="question">Are you ready? 💌</div>
+<button onclick="nextStep('q1','q2')">Yes</button>
+<button onclick="nextStep('q1','q2')">Always ready</button>
+</div>
+
+<!-- Q2 -->
+<div id="q2" class="hidden">
+<div class="question">Do you know how special you are? ✨</div>
+<button onclick="nextStep('q2','q3')">Maybe</button>
+<button onclick="nextStep('q2','q3')">Tell me</button>
+</div>
+
+<!-- Q3 -->
+<div id="q3" class="hidden">
+<div class="question">What day is this for? 🌹</div>
+<button onclick="nextStep('q3','q4')">Rose Day</button>
+<button onclick="nextStep('q3','q4')">Our day</button>
+</div>
+
+<!-- Q4 -->
+<div id="q4" class="hidden">
+<div class="question">Ready to receive your rose? 🐾</div>
+<button onclick="startCountdown()">Accept Rose</button>
+</div>
+
+<div id="count" class="hidden"><div id="cd">3</div></div>
+
+<div id="gifStep" class="hidden">
+<div class="question">A rose for Faiz Sir 🌹</div>
+<img src="cute.gif" width="200">
+<button onclick="showFinal()">Take the Rose</button>
+</div>
+
+<div id="final" class="hidden">
+<div class="question">You are warmth like coffee ☕❤️</div>
+<button onclick="showSecret()">Open Secret 💌</button>
+</div>
+
+<div id="secret" class="hidden">
+<div class="secretBox" id="secretText"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+const PASSWORD="i love you";   // ✅ new password
+let attempts=0;
+
+function unlock(){
+const v=document.getElementById("pass").value.toLowerCase().trim();
+const msg=document.getElementById("attemptMsg");
+const hint=document.getElementById("hint");
+
+if(v===PASSWORD){
+nextStep('lock','q1');
+msg.innerText="";
+return;
+}
+
+attempts++;
+
+if(attempts===1)
+msg.innerText="Arre gentleman… itna bhi tough nahi hai 😌 focus focus";
+else if(attempts===2)
+msg.innerText="Access denied… but love still allowed 🌹 try again";
+else{
+msg.innerText="Only my brewtiful gentleman knows this one ❤️ try again slowly";
+hint.style.display="block";
+}
+}
+
+function nextStep(a,b){
+document.getElementById(a).style.display='none';
+document.getElementById(b).style.display='block';
+}
+
+function startCountdown(){
+nextStep('q4','count');
+let n=3;
+const iv=setInterval(()=>{
+document.getElementById("cd").innerText=--n;
+if(n==0){clearInterval(iv);nextStep('count','gifStep');}
+},1000);
+}
+
+function showFinal(){
+nextStep('gifStep','final');
+document.getElementById("bgMusic").play().catch(()=>{});
+for(let i=0;i<40;i++) rose();
+}
+
+const secretMsg=`Be clingy with me.
+I don't want space — I want you.`;
+
+let i=0;
+function showSecret(){ nextStep('final','secret'); type(); }
+
+function type(){
+if(i<secretMsg.length){
+document.getElementById("secretText").innerHTML+=secretMsg[i++];
+setTimeout(type,25);
+}
+}
+
+function rose(){
+const r=document.createElement('div');
+r.className='rose';
+r.innerHTML='🌹';
+r.style.left=Math.random()*100+'vw';
+r.style.animationDuration=(3+Math.random()*5)+'s';
+document.body.appendChild(r);
+setTimeout(()=>r.remove(),8000);
+}
+</script>
+
+</body>
+</html>
